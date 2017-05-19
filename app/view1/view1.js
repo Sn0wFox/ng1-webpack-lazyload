@@ -1,6 +1,6 @@
 'use strict';
 
-angular
+module.exports = angular
   .module('myApp.view1', [])
   .config(function($stateProvider) {
     $stateProvider.state({
@@ -16,4 +16,4 @@ angular
   })
   .controller('View1Ctrl', function() {
 
-  });
+  }).name;

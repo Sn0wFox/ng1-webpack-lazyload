@@ -3,7 +3,8 @@ const path  = require('path');
 module.exports = {
   entry: path.resolve(__dirname, 'app/app.js'),
   output: {
-    filename: 'app.js'
+    filename: 'app.js',
+    publicPath: 'dist/'
   },
   module: {
     rules: [
@@ -15,7 +16,11 @@ module.exports = {
             // Leads to a wacky build, but necessary to use source maps correctly
             // with babel, which are broken since a bit earlier than version 6.x
             // TODO: change that in prod
-            retainLines: true
+            retainLines: true,
+            presets: [
+              'es2015'
+            ],
+            plugins: ['babel-plugin-dynamic-import-webpack']
           }
         },
         exclude: [

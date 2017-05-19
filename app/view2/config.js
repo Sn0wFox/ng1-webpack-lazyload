@@ -6,14 +6,26 @@ module.exports = function($stateProvider) {
     url: '/view2',
     views: {
       '@': {
-        templateUrl: 'view2/view2.html',
+        // templateUrl: 'view2/view2.html',
+        templateProvider: function() {
+          return import('./view2.html').then(function(template) {
+            return template;
+          });
+        },
         controller: 'View2Ctrl'
       }
     },
     resolve: {
       loadLazyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load(['view2/view2.js', 'view2/view2.html']);
+        // Here we define a split point
+        return import('./view2.js').then(function(module) {
+          $ocLazyLoad.load({
+            name: module.name
+          });
+          return module;
+        });
       }]
     }
-  })
+  });
 };
+

@@ -9,7 +9,15 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            // Leads to a wacky build, but necessary to use source maps correctly
+            // with babel, which are broken since a bit earlier than version 6.x
+            // TODO: change that in prod
+            retainLines: true
+          }
+        },
         exclude: [
           path.resolve(__dirname, 'node_modules')
         ]
@@ -34,6 +42,7 @@ module.exports = {
   devServer: {
     contentBase: './app'
   },
+  devtool: 'eval',  // TODO: better option for prod
   performance: {
     hints: false
   }

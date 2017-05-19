@@ -13,14 +13,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            // Leads to a wacky build, but necessary to use source maps correctly
-            // with babel, which are broken since a bit earlier than version 6.x
+            // Leads to a wacky build, but necessary to use source maps correctly using firefox
+            // and babel, which are broken with babel since a bit earlier than version 6.x
             // TODO: change that in prod
             retainLines: true,
+            // To make source maps works on Chrome
+            sourceMaps: 'both',
             presets: [
               'es2015'
             ],
-            plugins: ['babel-plugin-dynamic-import-webpack']
+            plugins: ['syntax-dynamic-import']
           }
         },
         exclude: [

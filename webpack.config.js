@@ -13,12 +13,11 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            // Leads to a wacky build, but necessary to use source maps correctly using firefox
-            // and babel, which are broken with babel since a bit earlier than version 6.x
-            // TODO: change that in prod
-            retainLines: true,
-            // To make source maps works on Chrome
-            sourceMaps: 'both',
+            // If source maps are broken, try to play with the following.
+            // Leads to a wacky build, but may be necessary to use source maps correctly
+            // using babel, which are kinda broken since a bit earlier than version 6.x
+            // retainLines: true,
+            // sourceMaps: 'both',
             presets: [
               'es2015'
             ],
@@ -49,7 +48,8 @@ module.exports = {
   devServer: {
     contentBase: './app'
   },
-  devtool: 'eval',  // TODO: better option for prod
+  devtool: 'eval-source-map', // dev
+  // devtool: 'source-map',      // prod
   performance: {
     hints: false
   }

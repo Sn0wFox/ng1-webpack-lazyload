@@ -6,6 +6,11 @@ npm start
 ```
 
 ## How to
+### Use source maps with Firefox
+1. Make sure to have a version 50+ installed
+2. Go to the url `about:config`
+3. Set `devtools.sourcemap.locations.enabled` to `true`.
+
 ### Import files
 * Without webpack (old stuff):
     ```html
@@ -24,7 +29,7 @@ npm start
     ```
     
     ```js
-    // Now  we need to import files in .js where we need it
+    // Now  we need to import files in .js only where we need it
     import angular  from 'angular';                     // Angular is imported here and not in the html
     import uiRouter from 'angular-ui-router';           // Same for needed other modules (from npm, bower one is legacy)
     import view1    from'./view1/view1';                // A needed static module
@@ -44,7 +49,20 @@ npm start
     and loaded on demand only.
     
     For more, see `app/view2` folder.
+    
+## Make it scale
+**Webpack is power.**
+
+Using webpack means being able to work with the latest technologies,
+giving that a loader exists for it.
+It also means being able to build an ap as modular as possible.
+
+Sass ? Use `sass-loader`. Pug ? Use `pug-loader`. ES7 ? Use another babel preset.
+Minimify ? Uglify ? Extract CSS ? Just use one of the [available plugins](https://github.com/webpack/docs/wiki/list-of-plugins),
+or write your own.
 
 ## Known issues
-* Sourcemaps don't work on Firefox... Mainly because of babel and Firefox itself.
-Nevertheless, it still works on Chrome for dev.
+* Source maps are broken in several places: Chrome, Firefox, Babel...
+*Fortunately*, using the last versions of these tools with the basic source maps
+for prod (`source-map`, `.js.map` generated files) and for dev
+(`eval-source-map`, inline and evaluated) works.

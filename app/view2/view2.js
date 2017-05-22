@@ -8,5 +8,6 @@
 module.exports = angular
   .module('myApp.view2', [])
   .controller('View2Ctrl', function($scope) {
+    console.log('Thrown from lazily loaded module, line 11');
     $scope.me = 'lazily loaded module';
   });

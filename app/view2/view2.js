@@ -1,5 +1,7 @@
 'use strict';
 
+import angular from 'angular';
+
 /**
  * The view2 module is meant to be lazily loaded.
  * Therefore, its configuration is exported in the file config.js.
@@ -8,6 +10,6 @@
 module.exports = angular
   .module('myApp.view2', [])
   .controller('View2Ctrl', function($scope) {
-    console.log('Thrown from lazily loaded module, line 11');
+    console.log('Thrown from lazily loaded module, line 13');
     $scope.me = 'lazily loaded module';
   });

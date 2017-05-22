@@ -20,5 +20,5 @@ module.exports = angular
     });
   })
   .controller('View1Ctrl', function() {
-    console.log('View1 controller, line 18! -> What source map say?');
+    console.log('View1 controller, line 23! -> What does source map say?');
   }).name;

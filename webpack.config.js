@@ -1,9 +1,13 @@
-const path  = require('path');
+const path    = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'app/app.js'),
+  entry: {
+    app: path.resolve(__dirname, 'app/app.js'),
+    vendor: ['angular']
+  },
   output: {
-    filename: 'app.js',
+    filename: '[name].js',
     publicPath: 'dist/'
   },
   module: {
@@ -45,6 +49,12 @@ module.exports = {
       path.resolve(__dirname, 'app/bower_components')
     ]
   },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: 2
+    })
+  ],
   devServer: {
     contentBase: './app'
   },

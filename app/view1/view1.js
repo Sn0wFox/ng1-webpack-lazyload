@@ -8,7 +8,12 @@ module.exports = angular
       url: '/view1',
       views: {
         '@': {
-          templateUrl: 'view1/view1.html',
+          // If we use the classic templateUrl property,
+          // the template will be loaded externally,
+          // unless we use another build tool
+          templateProvider: function() {
+            return require('./view1.html');
+          },
           controller: 'View1Ctrl'
         }
       }

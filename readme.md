@@ -8,18 +8,22 @@ npm start
 ## How to
 ### Use source maps
 * With Firefox
-    1. Make sure to have a version 50+ installed
-    2. Go to the url `about:config`
-    3. Set `devtools.sourcemap.locations.enabled` to `true`.
+ 
+        1. Make sure to have a version 50+ installed
+        2. Go to the url `about:config`
+        3. Set `devtools.sourcemap.locations.enabled` to `true`.
     
 * With Chrome
+
     It works with version `58.0.3029.110 (64-bit)`, and probably all 50+.
     
 * With Opera
+
     It works with version `45.0.2552.812`, and probably all 40+.
 
 * With Safari
-    Safari doesn't seems to like evaluated source maps. However, `.js.map` are fine.
+
+    Safari doesn't seems to like evaluated source maps. However, `.js.map` files are fine.
     Just be sure to work with `source-map` and not `eval-source-maps`.
 
 ### Import files

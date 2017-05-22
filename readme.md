@@ -6,6 +6,15 @@ npm start
 ```
 
 ## How to
+### Minimize / Uglify code for prod
+Use the `webpack.optimize.UglifyJsPlugin` plugin, but be sure to:
+* Use **NOT** evaluated source maps.
+* Use something to annotate AngularJS code:
+    - [babel-plugin-angularjs-annotate](https://www.npmjs.com/package/babel-plugin-angularjs-annotate) (currently used)
+    - [ng-annotate-webpack-plugin](https://www.npmjs.com/package/ng-annotate-webpack-plugin)
+    - [ng-annotate-loader](https://www.npmjs.com/package/ng-annotate-loader)
+    - Anything else you want and works great
+    
 ### Use source maps
 * With Firefox
  
@@ -39,6 +48,7 @@ npm start
 * With webpack (now):
     ```html
     <!--index.html-->
+    <script src="dist/vendor.js"></script>
     <script src="dist/app.js"></script>
     <!--...and that's it-->
     ```

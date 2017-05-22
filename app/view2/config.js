@@ -2,7 +2,7 @@
 
 // We define this here so we load the whole module and its template
 // in a single chunk file
-let bundle = (function() {
+let bundle = function() {
   return import('./view2.js')
     .then((module) => {
       return {
@@ -10,7 +10,7 @@ let bundle = (function() {
         template: require('./view2.html')
       };
     })
-})();
+};
 
 module.exports = function($stateProvider) {
   $stateProvider.state({
@@ -23,7 +23,7 @@ module.exports = function($stateProvider) {
         // Otherwise, the ui-router will load the template by its own
         // and won't use the chunk bundle
         templateProvider: function() {
-          return bundle.then(function(b) {
+          return bundle().then(function(b) {
             return b.template;
           });
         },
@@ -33,7 +33,7 @@ module.exports = function($stateProvider) {
     resolve: {
       loadLazyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         // Here we define a split point
-        return bundle.then(function(b) {
+        return bundle().then(function(b) {
           $ocLazyLoad.load({
             name: b.module.name
           });

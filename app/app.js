@@ -11,7 +11,7 @@ import lazy     from 'oclazyload/dist/ocLazyLoad';  // To lazily load modules
 import view2LazyConfig from './view2/config';       // Config for lazily loaded module View2
 
 console.log(uiRouter);
-console.log('lmao');
+console.log('Thrown from line 14');
 
 /**
  * The top level module, like we always do with AngularJS.

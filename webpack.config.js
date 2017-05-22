@@ -29,7 +29,8 @@ module.exports = {
               plugins: [
                 'syntax-dynamic-import',
                 'angularjs-annotate'    // To enable minimization to work with AngularJS
-              ]
+              ],
+              only: /^(?!.*app\/bower_components).*/
             }
           }],
         exclude: [

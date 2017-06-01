@@ -60,9 +60,9 @@ module.exports = {
       minChunks: 2
     }),
     // Only for PROD, or at least without evaluated source maps
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    // })
   ],
   devServer: {
     contentBase: './app'

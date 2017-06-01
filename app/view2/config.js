@@ -3,13 +3,8 @@
 // We define this here so we load the whole module and its template
 // in a single chunk file
 let bundle = function() {
-  return import('./view2.js')
-    .then((module) => {
-      return {
-        module: module,
-        template: require('./view2.html')
-      };
-    })
+  return import('./view2')
+    .then((module) => module)
 };
 
 module.exports = function($stateProvider) {
@@ -41,6 +36,11 @@ module.exports = function($stateProvider) {
         });
       }]
     }
+  });
+
+  require('./nested/config')($stateProvider, () => {
+    return bundle()
+      .then(b => b.nested);
   });
 };
 

@@ -5,6 +5,45 @@
 npm start
 ```
 
+## Side note
+This project is just a quick POC, not using a lot of ES6 syntax,
+and could be cleaned and completed.
+
+But it works well.
+
+## How does it work
+Basically, webpack starts from the entry point(s) defined in `webpack.config.js` and bundle
+everything required/imported in the same file.
+
+_But_, every time it encounters a [TC39 stage 3 import](https://github.com/tc39/proposal-dynamic-import)
+`import()` or a `require.ensure()`, it bundles all required/imported files from this import in
+another _chunk_. When you're application will need the code in that chunk,
+webpack will simply request your server and load that chunk.
+
+Here, we will have three chunks. Two coming directly from our defined entry points:
+* `app.js` - our app code, including `view1` module.
+* `vendor.js` - angular code.
+
+And one coming from a split point:
+* `0.js` - the whole `view2` module and everything it needs.
+
+NOTES:
+- In your `index.html` file, we only need to include the first two.
+- Since we are using the following common chunk plugin:
+
+        ```js
+        new webpack.optimize.CommonsChunkPlugin({
+          name: 'vendor',
+          minChunks: 2
+        }),
+        ```
+    no matter how many time you import angular in your app,
+    it will only be bundled once.
+- The application config, i.e. all the `states` coming from `ui-router`, are loaded with the main
+bundle, even for the lazily loaded modules. This is the easiest way to enable users to refresh
+a page currently displaying a lazily loaded URL, or to enter the URL directly.
+
+
 ## How to
 ### Minimize / Uglify code for prod
 Use the `webpack.optimize.UglifyJsPlugin` plugin, but be sure to:
@@ -66,7 +105,7 @@ Use the `webpack.optimize.UglifyJsPlugin` plugin, but be sure to:
 * Without webpack (old stuff): oops, not really.
 * With webpack (now):
     ```js
-    import('my/super/lazyloaded/thing').then(() => {
+    import('my/super/lazyloaded/thing').then((myThing) => {
       // use it
     });
     ```

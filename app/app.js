@@ -29,11 +29,11 @@ angular
     lazy,             // Standard export, i.e. the module's name
     view1             // Custom module, following the standard export
   ])
-  .config(['$stateProvider', function($stateProvider) {
+  .config(function($stateProvider) {
     $stateProvider.state({
       name: 'root'
     });
 
     // Finally, configure lazy modules thanks to exported config
     view2LazyConfig($stateProvider);
-  }]);
+  });

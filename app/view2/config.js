@@ -1,13 +1,14 @@
 'use strict';
 
-// We define this here so we load the whole module and its template
-// in a single chunk file
+// Thanks to this function, we define a split point in our build.
+// Now, all we have to do is to load everything this module need
+// through view2.js (or nested imports)
 let bundle = function() {
   return import('./view2')
     .then((module) => module)
 };
 
-module.exports = function($stateProvider) {
+export default ($stateProvider) => {
   $stateProvider.state({
     name: 'root.view2',
     url: '/view2',
@@ -18,7 +19,7 @@ module.exports = function($stateProvider) {
         // Otherwise, the ui-router will load the template by its own
         // and won't use the chunk bundle
         templateProvider: function() {
-          return bundle().then(function(b) {
+          return bundle().then((b) => {
             return b.template;
           });
         },

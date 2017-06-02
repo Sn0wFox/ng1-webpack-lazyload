@@ -28,11 +28,13 @@ module.exports = {
               ],
               plugins: [
                 'syntax-dynamic-import',
-                'angularjs-annotate'    // To enable minimization to work with AngularJS
+                'add-module-exports',
+                ['angularjs-annotate', { explicitOnly: false }],    // To enable minimization to work with AngularJS
               ],
               only: /^(?!.*app\/bower_components).*/
-            }
-          }],
+            },
+          },
+        ],
         exclude: [
           path.resolve(__dirname, 'node_modules')
         ]
